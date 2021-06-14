@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Business Map</title>
+	<link rel="shortcut icon" href="{%static 'img/favicon.png'%}" type="image/png">
+	<link rel="stylesheet" href="{%static 'css/normalize.css'%}">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,900&amp;subset=cyrillic" rel="stylesheet">
+	<link rel="stylesheet" href="{%static 'css/main.css'%}">
+	
+
+</head>
+<body>
+<header class="header">
+			<div class="container d-flex align-items-center">
+				<img src="{%static 'img/logo.png'%}" alt="LOGO" class="logo">
+			</div>
+</header>	
+	<section id="first" class="first">
+		<div class="content">
+			<div class="container d-flex">
+				<div class="slider">
+					<div class="ellips"></div>
+					<div class="lines-dot"></div>
+					<div class="plus-yellow"></div>
+					<div class="map_lg" id="map_lg_click"></div>
+					<div class="plus-dots"></div>
+					<div class="triangles"></div>
+					<div class="line-wave"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section id="second" class="second">
+		<div class="content">
+			<div class="container d-flex">
+				<div class="offer d-flex justify-content-center align-items-center">
+					<div class="offer__body">
+						<h1 class="offer__title">
+							
+							<span class="offer__word">
+								<span>
+									Бизнес карта
+								</span>
+							</span>
+						</h1>
+						
+						<div class="params" id="params">
+							<select id="glav">
+								<option value="hide">Вид деятельности</option>
+								<option value="food">ФУД РИТЕЙЛ</option>
+								<option value="restoran">РЕСТОРАНЫ</option>
+								<option value="med">МЕД УСЛУГИ</option>
+								<option value="shops">МАГАЗИНЫ</option>
+								<option value="salon">САЛОНЫ</option>
+								<option value="promos">УСЛУГИ</option>
+							</select> 
+							<!--
+							<select class="pod" id="zero" style='visibility:hidden;'>
+								<option value="hide">Подвид</option>
+							</select> 
+							
+							<select class="pod" id="foods">
+								<option value="hide">Подвид</option>
+								<option value="butcher">Мясо</option>
+								<option value="bakery">Булочная</option>
+								<option value="shop">Остальное</option>
+							</select> 
+							<select class="pod" id="restorans">
+								<option value="hide">Подвид</option>
+								<option value="cafe">Кафе/Рестораны</option>
+								<option value="drink">Клубы/Бары</option>
+							</select> 
+							<select class="pod" id="meds">
+								<option value="hide">Подвид</option>
+								<option value="clinic">Клиника</option>
+								<option value="vets">Вет Клиника</option>
+								<option value="dentist">Стоматология</option>
+							</select> 
+							<select class="pod" id="shops">
+								<option value="hide">Подвид</option>
+								<option value="chemist">Товары для дома</option>
+								<option value="pharmacy">Аптека</option>
+								<option value="florist">Цветочный</option>
+							</select> 
+							<select class="pod" id="salons">
+								<option value="hide">Подвид</option>
+								<option value="hairdresser">Парикмахерская</option>
+								<option value="spa">Салон красоты</option>
+							</select> 
+							<select class="pod" id="promos">
+								<option value="hide">Подвид</option>
+								<option value="fixer">Ремонт</option>
+								<option value="photo">Фотоателье</option>
+								<option value="tobacco">Табак</option>
+							</select>   -->
+							
+						</div>
+						<a href="#" class="offer__cta btn" onclick="conn()">
+							Поиск
+						</a>
+						
+					</div>
+					
+				</div>
+				<div id="map" >
+				<script
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDx23WvDaQxddNO4Tkh_3XO6WjREK4a_MA&callback=initMap&libraries=&v=weekly"
+				
+				async> </script>
+
+				<!--<iframe class="maps" id="map" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"  ></iframe><br/>-->
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="{%static 'js/jquery-3.3.1.min.js'%}"></script>
+	<script src="{%static 'js/parallax-mouse.js'%}"></script>
+	<script src="{%static 'js/main.js'%}"></script>
+	<script src="{%static 'js/main_click.js'%}"></script>
+
+	
+
+</body>
+</html>
