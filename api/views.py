@@ -1,9 +1,18 @@
+import json
+
+from django.contrib.auth.models import User
+from django.views.generic.base import TemplateView
+
 from rest_framework import generics, permissions
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from api.services.model import get_n_best
 from .permissions import IsOwner
 from .serializers import BucketlistSerializer, UserSerializer
 from .models import Bucketlist
-from django.contrib.auth.models import User
-from django.views.generic.base import TemplateView
+
 
 class CreateView(generics.ListCreateAPIView):
 	"""This class handles the GET and POSt requests of our rest api."""
@@ -42,3 +51,37 @@ class UserDetailsView(generics.RetrieveAPIView):
 
 class HomePageView(TemplateView):
 	template_name = 'index.html'
+
+
+class GetInputData(APIView):
+	"""
+	Сбор входных данных 
+	На вход получает один параметр
+	Возвращает строчку
+
+	пример: http://127.0.0.1:8000/get_data/?sphere=clinic&numbest=5
+	"""
+	@staticmethod
+	def get(request):
+		
+		try:
+			# Входные аргументы
+			arg_sphere = request.query_params.get('sphere')
+			arg_numbest = request.query_params.get('numbest')
+
+			print(arg_sphere, arg_numbest)
+			data = get_n_best(arg_sphere, arg_numbest)
+
+			# Пребразовать массив в строку
+			result = '' # Пока так
+			# result = json.dumps(data)
+			
+		except Exception as e:
+			return Response(data={
+				'Error': str(e),
+				'message': 'Ошибка!'
+			}, status=HTTP_400_BAD_REQUEST) #HTTP_400_BAD_REQUEST
+
+		return Response(data={
+			'result': result,
+		}, status=HTTP_200_OK)
