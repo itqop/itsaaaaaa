@@ -3,7 +3,7 @@ from .permissions import IsOwner
 from .serializers import BucketlistSerializer, UserSerializer
 from .models import Bucketlist
 from django.contrib.auth.models import User
-
+from django.views.generic.base import TemplateView
 
 class CreateView(generics.ListCreateAPIView):
     """This class handles the GET and POSt requests of our rest api."""
@@ -38,3 +38,7 @@ class UserDetailsView(generics.RetrieveAPIView):
     """View to retrieve a user instance."""
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class HomePageView(TemplateView):
+    template_name = 'index.html'
