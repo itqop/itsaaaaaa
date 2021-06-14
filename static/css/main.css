@@ -7,6 +7,78 @@ body {
 	letter-spacing: 0.09em;
 	text-transform: uppercase;
 }
+.select-hidden {
+display: none;
+visibility: hidden;
+padding-right: 10px;
+}
+.select {
+cursor: pointer;
+display: inline-block;
+position: relative;
+font-size: 16px;
+color: #fff;
+width: 270px;
+height: 70px;
+}
+.select-styled {
+position: absolute;
+top: 16%;
+right: 0;
+bottom: 0;
+left: 16%;
+background-color: #ff009c;
+padding: 8px 15px;
+}
+.select-styled:after {
+content: "";
+width: 0;
+height: 0;
+border: 7px solid transparent;
+border-color: #fff transparent transparent transparent;
+position: absolute;
+top: 16px;
+right: 10px;
+}
+.select-styled:hover {
+background-color: #30e9a1;
+}
+.select-styled:active, .select-styled.active {
+background-color: #30e9a1;
+}
+.select-styled:active:after, .select-styled.active:after {
+top: 9px;
+border-color: transparent transparent #fff transparent;
+}
+.select-options {
+display: none;
+position: absolute;
+top: 100%;
+right: 0;
+left: 16%;
+z-index: 999;
+margin: 0;
+padding: 0;
+list-style: none;
+background-color: #30e9a1;
+}
+.select-options li {
+margin: 0;
+padding: 12px 0;
+text-indent: 15px;
+border-top: 1px solid #ff003c;
+}
+.select-options li:hover {
+color: #ff000c;
+background: #fff;
+}
+.select-options li[rel="hide"] {
+display: none;
+}
+
+pod {
+	visibility: hidden;
+}
 #first {
 	visibility: visible;
 	height: 100%;
@@ -178,6 +250,9 @@ h1, h2, h3, h4, h5, h6 {
 .offer__btns {
 	margin-top: 3vh;
 	margin-left: 8vh;
+	left: 50%;
+	top: -30px;
+	position: absolute;
 }
 
 .offer__btn {
@@ -185,8 +260,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .offer__cta {
-	margin-top: 4vh;
 	margin: 0 auto;
+	left: 15%;
+	position: relative;
 }
 
 .content:before {
