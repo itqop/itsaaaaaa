@@ -4,31 +4,222 @@ var element = document.getElementById("map_lg_click");
 var F = document.getElementById("first"); 
 var S = document.getElementById("second");
 element.onclick = function() { 
+	F.style.display = "none";
 	F.style.visibility = "hidden";
 	F.style.height = '0';
 	S.style.visibility = "visible";
 	S.style.height = '100%';
 }
-var ir = "";
-var url = "https://overpass-turbo.eu/map.html?Q=";
-var req = "area%5Bname%3D%22%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%22%5D%3B(%20node%5Bamenity%20%3D%20%27cafe%27%5D(55.69979227758835%2C37.61220932006836%2C55.71521804306348%2C37.660823822021484)%3B)%3Bout%3B";
-function maps() {
+var newmap = "butcher";
+function pods(){
+	$('#zero').each(function(){
+    var $this = $(this), numberOfOptions = $(this).children('option').length;
+  
+    $this.addClass('select-hidden'); 
+    $this.wrap('<div id="zeros" class="select"></div>');
+    $this.after('<div class="select-styled"></div>');
 
-    document.querySelector(".maps").setAttribute("src", url+ test);
+    var $styledSelect = $this.next('div.select-styled');
+    $styledSelect.text($this.children('option').eq(0).text());
+  
+    var $list = $('<ul />', {
+        'class': 'select-options'
+    }).insertAfter($styledSelect);
+  
+    for (var i = 0; i < numberOfOptions; i++) {
+        $('<li />', {
+            text: $this.children('option').eq(i).text(),
+            rel: $this.children('option').eq(i).val()
+        }).appendTo($list);
+    }
+  
+    var $listItems = $list.children('li');
+  
+    $styledSelect.click(function(e) {
+        e.stopPropagation();
+        $('div.select-styled.active').not(this).each(function(){
+            $(this).removeClass('active').next('ul.select-options').hide();
+        });
+        $(this).toggleClass('active').next('ul.select-options').toggle();
+    });
+  
+    $listItems.click(function(e) {
+        e.stopPropagation();
+        $styledSelect.text($(this).text()).removeClass('active');
+        $this.val($(this).attr('rel'));
+        $list.hide();
+		switch ($this.val()){
+			case 'butcher':
+			newmap = "butcher";
+			break;
+			
+			case 'bakery':
+			newmap = "bakery";
+			break;
+			
+			case 'shop':
+			newmap = "shop";
+			break;
+			
+			case 'cafe':
+			newmap = "cafe";
+			break;
+			
+			case 'drink':
+			newmap = "drink";
+			break;
+			
+			case 'clinic':
+			newmap = "clinic";
+			break;
+			
+			case 'vets':
+			newmap = "vets";
+			break;
+			
+			
+			case 'dentist':
+			newmap = "dentist";
+			break;
+			
+			case 'chemist':
+			newmap = "chemist";
+			break;
+			case 'pharmacy':
+			newmap = "pharmacy";
+			break;
+			case 'florist':
+			newmap = "florist";
+			break;
+			case 'hairdresser':
+			newmap = "hairdresser";
+			break;
+			case 'fixer':
+			newmap = "fixer";
+			break;
+			case 'photo':
+			newmap = "photo";
+			break;
+			case 'tobacco':
+			newmap = "tobacco";
+			break;
+			case 'spa':
+			newmap = "spa";
+			break;
+		}
+		
+        
+    });
+	    $(document).click(function() {
+        $styledSelect.removeClass('active');
+        $list.hide();
+    });
+
+});
 }
+$('#glav').each(function(){
+    var $this = $(this), numberOfOptions = $(this).children('option').length;
+  
+    $this.addClass('select-hidden'); 
+    $this.wrap('<div class="select"></div>');
+    $this.after('<div class="select-styled"></div>');
 
-//let map;
+    var $styledSelect = $this.next('div.select-styled');
+    $styledSelect.text($this.children('option').eq(0).text());
+  
+    var $list = $('<ul />', {
+        'class': 'select-options'
+    }).insertAfter($styledSelect);
+  
+    for (var i = 0; i < numberOfOptions; i++) {
+        $('<li />', {
+            text: $this.children('option').eq(i).text(),
+            rel: $this.children('option').eq(i).val()
+        }).appendTo($list);
+    }
+  
+    var $listItems = $list.children('li');
+  
+    $styledSelect.click(function(e) {
+        e.stopPropagation();
+        $('div.select-styled.active').not(this).each(function(){
+            $(this).removeClass('active').next('ul.select-options').hide();
+        });
+        $(this).toggleClass('active').next('ul.select-options').toggle();
+    });
+  
+    $listItems.click(function(e) {
+        e.stopPropagation();
+        $styledSelect.text($(this).text()).removeClass('active');
+        $this.val($(this).attr('rel'));
+        $list.hide();
+		switch ($this.val()){
+			case 'food':
+			$('#zeros').remove();
+			$('#params').append('<select class="pod" id="zero" style="visibility:hidden;"><option value="hide">Подвид</option></select>'); 
+			$('#zero option').remove();
+			$('#zero').append('<option value="butcher">Мясо</option>');
+			$('#zero').append('<option value="bakery">Булочная</option>');
+			$('#zero').append('<option value="shop">Остальное</option>');
+			pods();
+			break;
+			case 'restoran':
+			$('#params').append('<select class="pod" id="zero" style="visibility:hidden;"><option value="hide">Подвид</option></select>'); 
+			document.getElementById("zero").visibility = "visible";
+			$('#zero option').remove();
+			$('#zero').append('<option value="cafe">Кафе/Рестораны</option>');
+			$('#zero').append('<option value="drink">Клубы/Бары</option>');
+			pods();
+			break;
+			case 'med':
+			$('#zeros').remove();
+			$('#params').append('<select class="pod" id="zero" style="visibility:hidden;"><option value="hide">Подвид</option></select>'); 
+			$('#zero option').remove();
+			$('#zero').append('<option value="clinic">Клиника</option>');
+			$('#zero').append('<option value="vets">Вет Клиника</option>');
+			$('#zero').append('<option value="dentist">Стоматология</option>');
+			pods();
+			break;
+			case 'shops':
+			$('#zeros').remove();
+			$('#params').append('<select class="pod" id="zero" style="visibility:hidden;"><option value="hide">Подвид</option></select>'); 
+			$('#zero option').remove();
+			$('#zero').append('<option value="chemist">Товары для дома</option>');
+			$('#zero').append('<option value="pharmacy">Аптека</option>');
+			$('#zero').append('<option value="florist">Цветочный</option>');
+			pods();
+			break;
+			case 'salon':
+			$('#zeros').remove();
+			$('#params').append('<select class="pod" id="zero" style="visibility:hidden;"><option value="hide">Подвид</option></select>'); 
+			$('#zero option').remove();
+			$('#zero').append('<option value="hairdresser">Парикмахерская</option>');
+			$('#zero').append('<option value="spa">Салон красоты</option>');
+			pods();
+			break;
+			case 'promos':
+			$('#zeros').remove();
+			$('#params').append('<select class="pod" id="zero" style="visibility:hidden;"><option value="hide">Подвид</option></select>'); 
+			$('#zero option').remove();
+			$('#zero').append('<option value="fixer">Ремонт</option>');
+			$('#zero').append('<option value="photo">Фотоателье</option>');
+			$('#zero').append('<option value="tobacco">Табак</option>');
+			pods();
+			break;
+		}
+        
+    });
+  
+    $(document).click(function() {
+        $styledSelect.removeClass('active');
+        $list.hide();
+    });
 
-//function initMap() {
-  //map = new google.maps.Map(document.getElementById("map"), {
-    //center: { lat: 55.6565, lng: 37.4989 },
-   // zoom: 14,
-  //});
-//}
+});
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 14,
-    center: { lat: -33.848588, lng: 151.209834 },
+    zoom: 12,
+    center: { lat: 55.7537, lng: 37.6198 },
   });
   // Create an array of alphabetical characters used to label the markers.
   const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -60,8 +251,7 @@ function conn() {
 	var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
 	var xhr = new XHR();
 
-	//xhr.open('GET', 'https://ya.ru/r=3',true);
-	xhr.open('GET', 'http://178.170.193.26/users/1', true,'admin','TestTest1');
+	xhr.open('GET', 'http://178.170.193.26/get_data/?sphere=clinic&numbest=5', true);
 	
 	//xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0');
 	xhr.setRequestHeader('Accept', '*/*');
@@ -72,14 +262,31 @@ function conn() {
 	xhr.setRequestHeader('Cache-Control', 'no-cache');
 	
 	xhr.send();
-
-
+	
+	var newmak = "[{'info': 'Оценка: 93.77511268266694, Количество конкурентов рядом: 2.0, Среднее количество людей в час: 79.0, Средняя ценя аренды за год за кв. м. 24000.0',\
+  'lat': 55.7465,\
+  'lng': 37.68},\
+ {'info': 'Оценка: 93.0667110095562, Количество конкурентов рядом: 1.0, Среднее количество людей в час: 43.5, Средняя ценя аренды за год за кв. м. 94462.0',\
+  'lat': 55.7295,\
+  'lng': 37.582},\
+ {'info': 'Оценка: 93.02916318479106, Количество конкурентов рядом: 0.0, Среднее количество людей в час: 119.6, Средняя ценя аренды за год за кв. м. 59545.5',\
+  'lat': 55.7405,\
+  'lng': 37.6575},\
+ {'info': 'Оценка: 92.37006769453689, Количество конкурентов рядом: 1.0, Среднее количество людей в час: 58.1, Средняя ценя аренды за год за кв. м. 29500.0',\
+  'lat': 55.7405,\
+  'lng': 37.6275},\
+ {'info': 'Оценка: 91.71193553187973, Количество конкурентов рядом: 1.0, Среднее количество людей в час: 29.3, Средняя ценя аренды за год за кв. м. 37000.0',\
+  'lat': 55.7375,\
+  'lng': 37.635000000000005}];";
 	if (xhr.status != 200) {
 	  alert( xhr.status + ': ' + xhr.statusText ); 
 	} else {
-
-	  alert( "ОК" ); 
+	  newmak = xhr.responseText;
 	}
+	eval("locations = "+newmak);
+	initMap();
+
+	
 }
 function conn1(){
 	var url = 'http://178.170.193.26/users/1';
@@ -94,8 +301,8 @@ function conn1(){
   }
 });
 }
-var locat = "var locations = [\
-  { lat: -33.848588, lng: 151.209834 , info: \"rer\"},\
-  { lat: -33.851702, lng: 151.216968 , info: \"erfre\"}];";
+var locat = "var locations = [{ info: 'ffff',lng: 37.6198,lat: 55.7537 }];"
+  //{ lat: -33.848588, lng: 151.209834 , info: \"rer\"},\
+  //{ lat: -33.851702, lng: 151.216968 , info: \"erfre\"}];";
 
 eval(locat)
