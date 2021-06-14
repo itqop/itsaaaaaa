@@ -66,16 +66,13 @@ class GetInputData(APIView):
 		
 		try:
 			# Входные аргументы
-			arg_sphere = request.query_params.get('sphere')
-			arg_numbest = request.query_params.get('numbest')
-
-			print(arg_sphere, arg_numbest)
+			arg_sphere = str(request.query_params.get('sphere'))
+			arg_numbest = int(request.query_params.get('numbest'))
 			data = get_n_best(arg_sphere, arg_numbest)
 
 			# Пребразовать массив в строку
-			result = '' # Пока так
-			# result = json.dumps(data)
-			
+			result = json.dumps(data, ensure_ascii=False,)
+		
 		except Exception as e:
 			return Response(data={
 				'Error': str(e),
